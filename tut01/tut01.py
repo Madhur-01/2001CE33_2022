@@ -9,7 +9,5 @@ def factorial(x):
             factorial = factorial*i
         return factorial
 
-
-
-x=int(input("Enter the number whose factorial is to be found"))
+x=int(input("Enter the number whose factorial is to be found : "))
 print(factorial(x))
