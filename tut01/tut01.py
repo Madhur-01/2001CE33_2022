@@ -85,6 +85,8 @@ while(size>0):
     m1 = str(x)
     m2= str(y)
     df.at[m+2,'Octant ID'] = m1 +'-'+m2 
+
+    #making a new data frame
     df2 = df.loc[x:y] 
    
     df.at[m+2,'+1'] = df2['octant'].value_counts()[+1]
