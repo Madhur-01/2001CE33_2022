@@ -1,8 +1,19 @@
-d
-ver = python_version()
+#MADHUR GARG, 2001CE33
 
-if ver == "3.8.10":
-    print("Correct Version Installed")
-else:
-    print("Please install 3.8.10. Instruction are present in the GitHub Repo/Webmail. Url: https://pastebin.com/nvibxmjw")
+#importing spandas
+import pandas as pd
+
+#reading the input file
+df = pd.read_csv("octant_input.csv")
+
+#data preprocessing
+df.at[0,'U_avg']  = df['U'].mean()
+df.at[0,'V_avg']  = df['V'].mean()
+df.at[0,'W_avg']  = df['W'].mean()
+
+
+df["U'"] = df['U'] - df.at[0,'U_avg']
+df["V'"] = df['V'] - df.at[0,'V_avg']
+df["W'"] = df['W'] - df.at[0,'W_avg']
+
 
