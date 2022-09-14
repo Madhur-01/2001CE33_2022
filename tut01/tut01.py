@@ -41,3 +41,21 @@ def octant(x,y,z) :
                 return +3
             else:
                 return -3
+#applying the above function           
+df['octant']         =   df.apply([lambda x : octant(x["U'"],x["V'"],x["W'"])], axis=1)
+
+#leaving an empty column
+df.at[1,''] = 'User Input'
+
+#counting individual octant uing value_counts function
+df.at[0,'Octant ID'] =   'Overall Count'
+df.at[0,'+1']        =   df['octant'].value_counts()[+1]
+df.at[0,'-1']        =   df['octant'].value_counts()[-1]
+df.at[0,'+2']        =   df['octant'].value_counts()[+2]
+df.at[0,'-2']        =   df['octant'].value_counts()[-2]
+df.at[0,'+3']        =   df['octant'].value_counts()[+3]
+df.at[0,'-3']        =   df['octant'].value_counts()[-3]
+df.at[0,'+4']        =   df['octant'].value_counts()[+4]
+df.at[0,'-4']        =   df['octant'].value_counts()[-4]
+
+
