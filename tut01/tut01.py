@@ -69,13 +69,13 @@ size = len(df['octant'])
 m=0
 #using a while loop to split the data 
 while(size>0):
-    temp = mod
+    temp1 = mod
     if m == 0: #starting from value 0
         x = 0
     else:
-        x = m*temp 
+        x = m*temp1 
 
-    y = m*temp+mod - 1
+    y = m*temp1+mod - 1
     if size<mod:
         mod = size
         size = 0
@@ -105,5 +105,4 @@ while(size>0):
     
 #saving the file as output    
 df.to_csv("Octant_output.csv")
-
 
