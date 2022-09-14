@@ -75,10 +75,11 @@ while(size>0):
     else:
         x = m*temp1 
 
-    y = m*temp1+mod - 1
     if size<mod:
         mod = size
         size = 0
+        
+    y = m*temp1+mod - 1
     
     
     #inserting range and their corresponding data
