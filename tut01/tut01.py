@@ -83,7 +83,7 @@ while(size>0):
     
     #inserting range and their corresponding data
     m1 = str(x)
-    m2= str👍
+    m2= str(y)
     df.at[m+2,'Octant ID'] = m1 +'-'+m2 
     df2 = df.loc[x:y] 
    
