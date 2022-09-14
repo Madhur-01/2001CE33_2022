@@ -73,9 +73,9 @@ while(size>0):
     if m == 0: #starting from value 0
         x = 0
     else:
-        x = m*temp + 1 
+        x = m*temp 
 
-    y = m*temp+mod
+    y = m*temp+mod - 1
     if size<mod:
         mod = size
         size = 0
