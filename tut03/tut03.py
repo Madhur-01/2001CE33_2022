@@ -141,3 +141,67 @@ for x in range(int(len(df)/mod)+13,int(len(df)/mod)+17):
             df.at[x,str(y)] = transition_count(df,x-int(len(df)/mod)-12,y)
             
             
+size = len(df['octant'])
+q=1
+
+#defining a function for mod transition count
+def mod_transition_count(df,mod,l,m):
+            k=0
+            if mod*q-1<len(df):
+                for i in range(mod*(q-1),mod*q-1):
+                    if df.at[i,'octant'] == l and df.at[i+1,'octant'] ==m:
+                        k = k+1
+            else:
+                for i in range(mod*(q-1),len(df)-1):
+                    if df.at[i,'octant'] == l and df.at[i+1,'octant'] ==m:
+                        k = k+1
+            return k 
+    
+mod = 5000
+#using a while loop to calculate mod transition count
+while(size>0):
+   
+
+    if size<mod:
+        size=0
+       
+    df.at[s+20+14*q,'Octant ID'] = 'Mod Transition Count'
+    df.at[s+21+14*q,'Octant ID'] =  'to'
+    df.at[s+22+14*q,'1']=  1
+    df.at[s+22+14*q,'-1']= -1
+    df.at[s+22+14*q,'2']=   2
+    df.at[s+22+14*q,'-2']= -2
+    df.at[s+22+14*q,'3']=   3
+    df.at[s+22+14*q,'-3']= -3
+    df.at[s+22+14*q,'4']=   4
+    df.at[s+22+14*q,'-4']= -4
+
+    df.at[s+22+14*q,'']= str(mod*(q-1))+"-"+str(mod*q)
+    df.at[s+23+14*q,'']= 'From'
+    df.at[s+22+14*q,'Octant ID'] = "Count"  
+    df.at[s+23+14*q,'Octant ID']=  -4
+    df.at[s+24+14*q,'Octant ID']= -3
+    df.at[s+25+14*q,'Octant ID']= -2
+    df.at[s+26+14*q,'Octant ID']= -1
+    df.at[s+27+14*q,'Octant ID']=  1
+    df.at[s+28+14*q,'Octant ID']=  2
+    df.at[s+29+14*q,'Octant ID']=  3
+    df.at[s+30+14*q,'Octant ID']=  4
+
+    #calculating overall transition count
+    for x in range(int(len(df)/mod)+24+14*q,int(len(df)/mod)+28+14*q):
+        for y in range(-4,5) :
+                df.at[x,str(y)] = mod_transition_count(df,mod,x-int(len(df)/mod)-28-14*q,y)
+    for x in range(int(len(df)/mod)+28+14*q,int(len(df)/mod)+32+14*q):
+        for y in range(-4,5) :
+                df.at[x,str(y)] = mod_transition_count(df,mod,x-int(len(df)/mod)-27-14*q,y)
+
+
+    q = q + 1
+    size = size - mod
+    
+#deleting extra column
+del df['0']
+
+#converting file to excel
+df.to_excel('output_octant_transition_identinty.xlsx')            
