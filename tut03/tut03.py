@@ -100,3 +100,44 @@ while(size>0):
     m = m + 1
     size = size - mod
     
+#defining a function to get transition count 
+def transition_count(df,l,m):
+    k=0
+    for i in range(len(df)-1):
+        if df.at[i,'octant'] == l and df.at[i+1,'octant'] ==m:
+            k = k+1
+    return k
+
+
+s = int(len(df)/mod)
+df.at[s+6,'Octant ID'] = 'Overall Transition Count'
+df.at[s+7,'Octant ID'] =  'to'
+df.at[s+8,'1']=  1
+df.at[s+8,'-1']= -1
+df.at[s+8,'2']=   2
+df.at[s+8,'-2']= -2
+df.at[s+8,'3']=   3
+df.at[s+8,'-3']= -3
+df.at[s+8,'4']=   4
+df.at[s+8,'-4']= -4
+
+df.at[s+9,'']= 'From'
+df.at[s+8,'Octant ID'] = "Count"  
+df.at[s+9,'Octant ID']=  -4
+df.at[s+10,'Octant ID']= -3
+df.at[s+11,'Octant ID']= -2
+df.at[s+12,'Octant ID']= -1
+df.at[s+13,'Octant ID']=  1
+df.at[s+14,'Octant ID']=  2
+df.at[s+15,'Octant ID']=  3
+df.at[s+16,'Octant ID']=  4
+
+#calculating overall transition count
+for x in range(int(len(df)/mod)+9,int(len(df)/mod)+13):
+    for y in range(-4,5) :
+            df.at[x,str(y)] = transition_count(df,x-int(len(df)/mod)-13,y)
+for x in range(int(len(df)/mod)+13,int(len(df)/mod)+17):
+    for y in range(-4,5) :
+            df.at[x,str(y)] = transition_count(df,x-int(len(df)/mod)-12,y)
+            
+            
