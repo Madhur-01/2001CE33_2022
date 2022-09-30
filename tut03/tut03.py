@@ -60,6 +60,43 @@ df.at[0,'-4']        =   df['octant'].value_counts()[-4]
 
 mod = 5000
 
-
 df.at[1,'Octant ID'] = 'Mod '+ str(mod)
 
+size = len(df['octant'])
+m=0
+#using a while loop to split the data 
+while(size>0):
+    temp1 = mod
+    if m == 0: #starting from value 0
+        x = 0
+    else:
+        x = m*temp1 
+
+    if size<mod:
+        mod = size
+        size = 0
+        
+    y = m*temp1+mod - 1
+    
+    
+    #inserting range and their corresponding data
+    m1 = str(x)
+    m2= str(y)
+    df.at[m+2,'Octant ID'] = m1 +'-'+m2 
+
+    #making a new data frame
+    df2 = df.loc[x:y] 
+   
+    df.at[m+2,'1'] = df2['octant'].value_counts()[+1]
+    df.at[m+2,'2'] = df2['octant'].value_counts()[+2]
+    df.at[m+2,'3'] = df2['octant'].value_counts()[+3]
+    df.at[m+2,'4'] = df2['octant'].value_counts()[+4]
+    df.at[m+2,'-1'] = df2['octant'].value_counts()[-1]
+    df.at[m+2,'-2'] = df2['octant'].value_counts()[-2]
+    df.at[m+2,'-3'] = df2['octant'].value_counts()[-3]
+    df.at[m+2,'-4'] = df2['octant'].value_counts()[-4]
+    
+
+    m = m + 1
+    size = size - mod
+    
