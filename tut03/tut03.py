@@ -54,7 +54,7 @@ def longest_subsequence_count():
     max_subsequence_len=[-1,-1,-1,-1,-1,-1,-1,-1]
     temp_subsequence_len=[0,0,0,0,0,0,0,0] 
     max_subsequence_count=[0,0,0,0,0,0,0,0] 
-    for t in range(total_rows-1): 
+    for t in range(total_rows-1): #Applying logic here.
         for u in range(8):
             if(df.at[t,'Octant']==octant_val[u]):
                 if(df.at[t+1,'Octant']==octant_val[u]):
@@ -84,3 +84,4 @@ def longest_subsequence_count():
 
 #Calling the main function.
 longest_subsequence_count()
+
