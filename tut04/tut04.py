@@ -101,6 +101,6 @@ for x in l1: #finding subsequence for every octant
     i += 1
 
 try: 
-    df.to_excel('output_octant_longest_subsequence_with_range')
+    df.to_excel('output_octant_longest_subsequence_with_range.xlsx')
 except:
     print("An exception occurred")
