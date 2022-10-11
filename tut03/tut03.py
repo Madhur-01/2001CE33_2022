@@ -49,10 +49,13 @@ df['Octant_No'] = ''
 df['Longest_Subsequence_Length'] = ''
 df['Count'] = ''
 
-l1 = [1,-1,2,-2,3,-3,4,-4] #making a list of all the octants
+#making a list of all the octants
+l1 = [1,-1,2,-2,3,-3,4,-4] 
 l = df['Octant'].tolist()
 i=0
-for x in l1: #finding subsequence for every octant
+
+#finding subsequence for every octant
+for x in l1: 
     df.at[i,'Octant_No'] = x
     count = 1
     temp = 1
@@ -70,6 +73,8 @@ for x in l1: #finding subsequence for every octant
     df.at[i,'Longest_Subsequence_Length'] = mx
     df.at[i,'Count'] = count
     i += 1
+
+#saving file in excel form
 try: 
     df.to_excel('output_octant_longest_subsequence.xlsx')
 except:
