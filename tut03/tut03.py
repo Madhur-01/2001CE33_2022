@@ -2,9 +2,9 @@
 
 #importing pandas
 import pandas as pd
-
+import os
 #reading the input file
-df = pd.read_excel("input_octant_longest_subsequence.xlsx")
+df = pd.read_excel("input_octant_longest_subsequence_with_range.xlsx")
 
 #data preprocessing
 df.at[0,'U_avg']  = df['U'].mean()
@@ -44,44 +44,33 @@ def octant(x,y,z) :
 #applying the above function           
 df['Octant']         =   df.apply([lambda x : octant(x["U'"],x["V'"],x["W'"])], axis=1)
 
-# #Finding total number of rows.
-total_rows=len(df.axes[0])
+#making columns for subsequence
+df['Octant_No'] = ''
+df['Longest_Subsequence_Length'] = ''
+df['Count'] = ''
 
-#Defining a function to find count of longest subsequence.
-def longest_subsequence_count():
-    octant_val=[1,-1,2,-2,3,-3,4,-4] #Numbers assigning octants.
-    subsequence_len=[0,0,0,0,0,0,0,0] 
-    max_subsequence_len=[-1,-1,-1,-1,-1,-1,-1,-1]
-    temp_subsequence_len=[0,0,0,0,0,0,0,0] 
-    max_subsequence_count=[0,0,0,0,0,0,0,0] 
-    for t in range(total_rows-1): #Applying logic here.
-        for u in range(8):
-            if(df.at[t,'Octant']==octant_val[u]):
-                if(df.at[t+1,'Octant']==octant_val[u]):
-                    subsequence_len[u]+=1
-                else:
-                    max_subsequence_len[u]=max(max_subsequence_len[u],subsequence_len[u])
-                    subsequence_len[u]=0
-                break
-    for t in range(total_rows-1):
-        for u in range(8):
-            if(df.at[t,'Octant']==octant_val[u]):
-                if(df.at[t+ 1,'Octant']==octant_val[u]):
-                    temp_subsequence_len[u]+=1
-                else:
-                    if(temp_subsequence_len[u]==max_subsequence_len[u]):
-                        max_subsequence_count[u]+=1
-                    temp_subsequence_len[u]=0
-                break
-    
-    for i in range(8):
-        df.loc[df.index[i],'Octant Num.']=octant_val[i]
-        df.loc[df.index[i],'Longest Subsequence Length']=max_subsequence_len[i]+1
-        df.loc[df.index[i],'Count']=max_subsequence_count[i]
-    
-    #Now storing this dataframe to an excel file.
-    df.to_excel('output_octant_longest_subsequence.xlsx')
-
-#Calling the main function.
-longest_subsequence_count()
-
+l1 = [1,-1,2,-2,3,-3,4,-4] #making a list of all the octants
+l = df['Octant'].tolist()
+i=0
+for x in l1: #finding subsequence for every octant
+    df.at[i,'Octant_No'] = x
+    count = 1
+    temp = 1
+    mx = 0
+    for y in range(len(l)-1):
+        if x == l[y] and x == l[y+1]:
+            temp += 1
+        else:
+            if mx == temp:
+                count += 1
+            elif mx < temp:
+                count = 1
+            mx = max(mx,temp)
+            temp = 1
+    df.at[i,'Longest_Subsequence_Length'] = mx
+    df.at[i,'Count'] = count
+    i += 1
+try: 
+    df.to_excel('res.xlsx')
+except:
+    print("An exception occurred")
