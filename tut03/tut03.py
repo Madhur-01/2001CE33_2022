@@ -4,7 +4,7 @@
 import pandas as pd
 import os
 #reading the input file
-df = pd.read_excel("input_octant_longest_subsequence_with_range.xlsx")
+df = pd.read_excel("input_octant_longest_subsequence.xlsx")
 
 #data preprocessing
 df.at[0,'U_avg']  = df['U'].mean()
@@ -71,6 +71,6 @@ for x in l1: #finding subsequence for every octant
     df.at[i,'Count'] = count
     i += 1
 try: 
-    df.to_excel('res.xlsx')
+    df.to_excel('output_octant_longest_subsequence.xlsx')
 except:
     print("An exception occurred")
