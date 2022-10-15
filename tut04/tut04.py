@@ -49,16 +49,16 @@ df['Octant_No'] = ''
 df['Longest_Subsequence_Length'] = ''
 df['Count'] = ''
 
-l1 = [1,-1,2,-2,3,-3,4,-4] #making a list of all the octants
-l = df['Octant'].tolist()
+l = [1,-1,2,-2,3,-3,4,-4] #making a list of all the octants
+l1 = df['Octant'].tolist()
 i=0
-for x in l1: #finding subsequence for every octant
+for x in l: #finding subsequence for every octant
     df.at[i,'Octant_No'] = x
     count = 1
     temp = 1
     mx = 0
-    for y in range(len(l)-1):
-        if x == l[y] and x == l[y+1]:
+    for y in range(len(l1)-1):
+        if x == l1[y] and x == l1[y+1]:
             temp += 1
         else:
             if mx == temp:
@@ -77,7 +77,7 @@ df[''] = ''
 df['Octant_No.'] = ''
 df['Longest_Subsequence_Length_'] = ''
 df['count'] = ''
-for x in l1: #finding subsequence for every octant
+for x in l: #finding subsequence for every octant
     t1 = df.at[i,'Longest_Subsequence_Length']
     df.at[j,'Octant_No.'] = df.at[i,'Octant_No']
     df.at[j,'Longest_Subsequence_Length_'] = df.at[i,'Longest_Subsequence_Length']
@@ -88,8 +88,8 @@ for x in l1: #finding subsequence for every octant
     df.at[j,'count'] = 'To'
     j += 1
     temp = 1
-    for y in range(len(l)-1):
-        if x == l[y] and x == l[y+1]:
+    for y in range(len(l1)-1):
+        if x == l1[y] and x == l1[y+1]:
             temp += 1
         elif temp == df.at[i,'Longest_Subsequence_Length']:
             df.at[j,'Longest_Subsequence_Length_'] = df.at[y-temp+1,'Time']
