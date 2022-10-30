@@ -51,14 +51,14 @@ df.at[1,''] = 'User Input'
 
 #counting individual octant uing value_counts function
 df.at[0,'Octant ID'] =   'Overall Count'
-df.at[0,'1']        =   df['octant'].value_counts()[+1]
-df.at[0,'-1']        =   df['octant'].value_counts()[-1]
-df.at[0,'2']        =   df['octant'].value_counts()[+2]
-df.at[0,'-2']        =   df['octant'].value_counts()[-2]
-df.at[0,'3']        =   df['octant'].value_counts()[+3]
-df.at[0,'-3']        =   df['octant'].value_counts()[-3]
-df.at[0,'4']        =   df['octant'].value_counts()[+4]
-df.at[0,'-4']        =   df['octant'].value_counts()[-4]
+df.at[0,'1']        =   str(df['octant'].value_counts()[+1])
+df.at[0,'-1']        =   str(df['octant'].value_counts()[-1])
+df.at[0,'2']        =   str(df['octant'].value_counts()[+2])
+df.at[0,'-2']        =   str(df['octant'].value_counts()[-2])
+df.at[0,'3']        =   str(df['octant'].value_counts()[+3])
+df.at[0,'-3']        =   str(df['octant'].value_counts()[-3])
+df.at[0,'4']        =   str(df['octant'].value_counts()[+4])
+df.at[0,'-4']        =   str(df['octant'].value_counts()[-4])
 
 
 #asking user for input
@@ -90,14 +90,14 @@ while(size>0):
     df.at[m+2,'Octant ID'] = m1 +'-'+m2 
     df2 = df.loc[x:y] 
    
-    df.at[m+2,'1'] = df2['octant'].value_counts()[+1]
-    df.at[m+2,'2'] = df2['octant'].value_counts()[+2]
-    df.at[m+2,'3'] = df2['octant'].value_counts()[+3]
-    df.at[m+2,'4'] = df2['octant'].value_counts()[+4]
-    df.at[m+2,'-1'] = df2['octant'].value_counts()[-1]
-    df.at[m+2,'-2'] = df2['octant'].value_counts()[-2]
-    df.at[m+2,'-3'] = df2['octant'].value_counts()[-3]
-    df.at[m+2,'-4'] = df2['octant'].value_counts()[-4]
+    df.at[m+2,'1'] = str(df2['octant'].value_counts()[+1])
+    df.at[m+2,'2'] = str(df2['octant'].value_counts()[+2])
+    df.at[m+2,'3'] = str(df2['octant'].value_counts()[+3])
+    df.at[m+2,'4'] = str(df2['octant'].value_counts()[+4])
+    df.at[m+2,'-1'] = str(df2['octant'].value_counts()[-1])
+    df.at[m+2,'-2'] = str(df2['octant'].value_counts()[-2])
+    df.at[m+2,'-3'] = str(df2['octant'].value_counts()[-3])
+    df.at[m+2,'-4'] = str(df2['octant'].value_counts()[-4])
     
 
     m = m + 1
@@ -121,8 +121,8 @@ for i in range(len(list)):
     df.at[0,'rank'+(df == list[i]).idxmax(axis=1)[0]] = k
     k = k-1
 #filling the octant with highest count
-df.at[0,'Rank1 Octant ID'] = (df == list[7]).idxmax(axis=1)[0]
-df.at[1,'Rank1 Octant ID'] = 0
+df.at[0,'Rank1_Octant_ID'] = int((df == list[7]).idxmax(axis=1)[0])
+df.at[1,'Rank1_Octant_ID'] = int(0)
 #filling the name of octant
 df.at[0,'Rank1 Octant Name'] = dict[(df == list[7]).idxmax(axis=1)[0]]
 
@@ -136,47 +136,38 @@ for j in range(2,int(len(df)/mod)+2):
     for i in range(1,5):
         list.append(df.at[j,str(i)])
     list.sort()
-    print(list)
     k = 8
     for i in range(len(list)):
         df.at[j,'rank'+(df == list[i]).idxmax(axis=1)[j]] = k
         k = k-1
     #filling the octant with highest count
-    df.at[j,'Rank1 Octant ID'] = (df == list[7]).idxmax(axis=1)[j]
-    
+    df.at[j,'Rank1_Octant_ID'] = int((df == list[7]).idxmax(axis=1)[j])
     #filling the name of octant
     df.at[j,'Rank1 Octant Name'] = dict[(df == list[7]).idxmax(axis=1)[j]]
 
 
-
-#df.at[6+int(len(df)/mod),'1'] = 'Octant ID'
+#calculating count of rank1 mod values
+df.at[6+int(len(df)/mod),'1'] = 'Octant ID'
+df.at[6+int(len(df)/mod),'2'] = 'Octant Name'
+df.at[6+int(len(df)/mod),'3'] = 'Count of rank1 mod values'
 k = 1
 for i in range(-4,0):
         df.at[k+6+int(len(df)/mod),'1'] = i
+        df.at[k+6+int(len(df)/mod),'2'] = dict[str(i)]
+        try :
+          df.at[k+6+int(len(df)/mod),'3'] = df['Rank1_Octant_ID'].value_counts()[int(i)]
+        except :
+            df.at[k+6+int(len(df)/mod),'3'] = 0
         k = k+1
 for i in range(1,5):
         df.at[k+6+int(len(df)/mod),'1'] = i
-        k = k+1
-df.to_excel("Octant_output.xlsx")
-print(df)
-    
-# df.at[6+int(len(df)/mod),'2'] = 'Octant Name'
-# k= 1
-# for i in range(-4,0):
-#         df.at[k+6+int(len(df)/mod),'2'] = dict[str(i)]
-#         k = k+1
-# for i in range(1,5):
-#         df.at[k+6+int(len(df)/mod),'2'] = dict[str(i)]
-#         k = k+1
-#df.at[6+int(len(df)/mod),'3'] = 'Count of rank1 mod values'
-
-k= 1
-for i in range(-4,0):
-        df.at[k+6+int(len(df)/mod),'3'] = df['Rank1 Octant ID'].value_counts()[i]
-        k = k+1
-for i in range(1,5):
-        df.at[k+6+int(len(df)/mod),'3'] = df['Rank1 Octant ID'].value_counts()[i]
+        df.at[k+6+int(len(df)/mod),'2'] = dict[str(i)]
+        try :
+          df.at[k+6+int(len(df)/mod),'3'] = df['Rank1_Octant_ID'].value_counts()[int(i)]
+        except :
+            df.at[k+6+int(len(df)/mod),'3'] = 0
         k = k+1
 
-
-print(df)
+        
+#saving the file as output  
+df.to_excel("octant_output_ranking_excel.xlsx")
