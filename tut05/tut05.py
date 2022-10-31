@@ -122,7 +122,6 @@ for i in range(len(list)):
     k = k-1
 #filling the octant with highest count
 df.at[0,'Rank1_Octant_ID'] = int((df == list[7]).idxmax(axis=1)[0])
-df.at[1,'Rank1_Octant_ID'] = int(0)
 #filling the name of octant
 df.at[0,'Rank1 Octant Name'] = dict[(df == list[7]).idxmax(axis=1)[0]]
 
