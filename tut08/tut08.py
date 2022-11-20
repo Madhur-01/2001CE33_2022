@@ -21,34 +21,34 @@ def OnE_iNnInG(inn1,bat_pl,bow_pl,s) : #making function for one innings
 
     #scorecard and index
     S1['A1']    = s + ' Innings'
-    S1['I1']     = '0-0'
+    S1['I1']    = '0-0'
     S1['J1']    = '0 overs'
     S1['A2']    = 'Batter'
-    S1['F2']     = 'R'
-    S1['G2']     = 'B'
+    S1['F2']    = 'R'
+    S1['G2']    = 'B'
     S1['H2']    = '4s'
     S1['I2']    = '6s'
-    S1['J2']     = 'SR'
+    S1['J2']    = 'SR'
 
 
     S2['A1']    = 'Bowler'
-    S2['D1'] =  'O'
+    S2['D1']    =  'O'
     S2['E1']    = 'M'
     S2['F1']    = 'R'
-    S2['G1'] =  'W'
+    S2['G1']    =  'W'
     S2['H1']    = 'NB'
-    S2['I1'] =  'WD'
-    S2['J1']     = 'ECO'
+    S2['I1']    =  'WD'
+    S2['J1']    = 'ECO'
 
     
     S3['A1']    = 'Fall of wickets'
     
 
     #using regex
-    Over   =   re.compile(r'(\d\d?\.\d)')
+    Over      =   re.compile(r'(\d\d?\.\d)')
     Zero      =   re.compile(r'no run')
     No_ball   =   re.compile(r', (no ball),')
-    Wide    =     re.compile(r', wide,')
+    Wide      =   re.compile(r', wide,')
     Wide2     =   re.compile(r', 2 wides,')
     wide3     =   re.compile(r', 3 wides,')
     single    =   re.compile(r', 1 run,')
