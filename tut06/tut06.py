@@ -1,25 +1,26 @@
+#MADHUR GARG 2001CE33
 
-
+# In the below code we will be reading and writing in multiple .xlsx files.
+import pandas as pd
 from datetime import datetime
 start_time = datetime.now()
 
-def attendance_report():
-###Code
+#defining a funcion.
 
-from platform import python_version
-ver = python_version()
+def AttEnDeNcE_RePoRt():
+    try:
+        
+        DF1 = pd.read_csv('input_attendance.csv')
+        DF2 = pd.read_csv('input_registered_students.csv')
 
-if ver == "3.8.10":
-    print("Correct Version Installed")
-else:
-    print("Please install 3.8.10. Instruction are present in the GitHub Repo/Webmail. Url: https://pastebin.com/nvibxmjw")
-
-
-attendance_report()
+    except:
+        print("There was an error reading the file.")
 
 
-
-
-#This shall be the last lines of the code.
-end_time = datetime.now()
-print('Duration of Program Execution: {}'.format(end_time - start_time))
+    # Adding empty columns 
+    DF1['Roll']  = ''
+    DF1['Time']  = ''
+    DF1['Date']  = ''
+    DF1['Day']   = ''
+    DF1['Month'] = ''
+    DF1['Year']  = ''
