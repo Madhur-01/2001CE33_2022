@@ -3,11 +3,13 @@
 #importing numpy and pandas
 import numpy as np
 import pandas as pd
+import openpyxl
 
 
 #reading the input file
 import os
-path = r"C:\Users\madhu\Dropbox\My PC (LAPTOP-9DI2D1AT)\Documents\GitHub\2001CE33_2022\tut07\input"
+path = r"input"
+path2 = r"output"
 for file in os.listdir(path):
     df = pd.read_excel(os.path.join(path,file))
 
@@ -338,6 +340,23 @@ for file in os.listdir(path):
             else:
                 temp = 1
         i += 1
-    df.to_excel('1_output.xlsx')            
+    df.to_excel('output/'+file+'_output.xlsx',index = False)
+    
+
+    from openpyxl.styles import PatternFill   
+    wb = openpyxl.load_workbook(os.path2.join(path2,file))
+
+    # entries = os.listdir('input/')
+    # from collections import OrderedDict
+    # import numpy as np
+    # #Help
+    # from openpyxl.styles.borders import Border, Side
+    # from openpyxl.styles import PatternFill
+    # from openpyxl import Workbook
+    # fill_cell = PatternFill(start_color='00FFFF00',end_color='00FFFF00',fill_type='solid')
+
+    # def octant_analysis(mod=5000):
+	#     for file1 in entries:  
+    # sheet_obj.cell(row=x, column=y).border = thin_border       
     print(df)
 
